@@ -71,16 +71,22 @@ export function Contact() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                Contact
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
+                <span aria-hidden="true" className="tabular-nums text-muted">
+                  05
+                </span>
+                <span aria-hidden="true" className="text-muted/70">
+                  —
+                </span>
+                <span className="text-accent">Contact</span>
               </p>
               <h2
                 id={`${sectionIds.contact}-title`}
-                className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
+                className="mt-3 text-[1.75rem]/[1.16] font-semibold tracking-[-0.02em] text-navy sm:text-[2.125rem]/[1.14]"
               >
                 Parlons de votre prochain projet.
               </h2>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
+              <p className="mt-5 max-w-md text-[16px]/[1.65] text-muted">
                 Vous avez besoin d’un site web, d’une application ou d’une solution
                 adaptée à votre activité ? Contactez-moi pour discuter de votre
                 besoin.

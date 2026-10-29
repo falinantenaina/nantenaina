@@ -18,6 +18,7 @@ export function Skills() {
     <Section
       id={sectionIds.skills}
       eyebrow="Compétences"
+      index="02"
       title="Un socle technique complet"
       description="Les technologies que j’utilise au quotidien, réparties par domaine d’intervention. Aucun pourcentage artificiel : seuls des outils réellement utilisés sur des projets."
       className="border-b border-line bg-surface/45"

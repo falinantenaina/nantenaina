@@ -9,8 +9,14 @@ export function Projects() {
     <Section
       id={sectionIds.projects}
       eyebrow="Projets"
+      index="03"
       title="Des réalisations concrètes"
-      description="Une sélection de projets web menés en équipe ou en freelance, du site e-commerce à l’application complète."
+      description={
+        <>
+          Une sélection de projets web menés en équipe ou en freelance, du site
+          e&#8209;commerce à l’application complète.
+        </>
+      }
       headerAside={
         projectsWithoutScreenshot.length > 0 ? (
           <Reveal>

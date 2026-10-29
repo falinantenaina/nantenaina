@@ -5,6 +5,8 @@ import { Container } from "@/components/ui/container";
 type SectionProps = {
   id: string;
   eyebrow?: string;
+  /** Index éditorial de la section, affiché devant le surtitre (« 03 — Projets »). */
+  index?: string;
   title: ReactNode;
   description?: ReactNode;
   children: ReactNode;
@@ -16,6 +18,7 @@ type SectionProps = {
 export function Section({
   id,
   eyebrow,
+  index,
   title,
   description,
   children,
@@ -32,18 +35,28 @@ export function Section({
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             {eyebrow ? (
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                {eyebrow}
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
+                {index ? (
+                  <span aria-hidden="true" className="tabular-nums text-muted">
+                    {index}
+                  </span>
+                ) : null}
+                {index ? (
+                  <span aria-hidden="true" className="text-muted/70">
+                    —
+                  </span>
+                ) : null}
+                <span className="text-accent">{eyebrow}</span>
               </p>
             ) : null}
             <h2
               id={`${id}-title`}
-              className="mt-3 text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
+              className="mt-3 text-[1.75rem]/[1.16] font-semibold tracking-[-0.02em] text-navy sm:text-[2.125rem]/[1.14]"
             >
               {title}
             </h2>
             {description ? (
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+              <p className="mt-4 max-w-[38rem] text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
                 {description}
               </p>
             ) : null}

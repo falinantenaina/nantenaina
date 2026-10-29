@@ -34,7 +34,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div
         className={cn(
           "flex flex-1 flex-col",
-          featured ? "p-6 sm:p-8 lg:p-10" : "p-6",
+          featured ? "justify-center p-6 sm:p-8 lg:p-10" : "p-6",
         )}
       >
         <ul className="flex flex-wrap items-center gap-2">
@@ -56,8 +56,8 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <h3
           className={cn(
-            "mt-4 font-semibold tracking-tight text-navy",
-            featured ? "text-2xl sm:text-[1.75rem]" : "text-xl",
+            "mt-4 font-semibold tracking-[-0.015em] text-navy",
+            featured ? "text-2xl/[1.2] sm:text-[1.75rem]/[1.18]" : "text-xl/[1.25]",
           )}
         >
           {project.name}
@@ -65,21 +65,22 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <p
           className={cn(
-            "flex-1 leading-relaxed text-muted",
-            featured ? "mt-3 text-base" : "mt-2.5 text-sm",
+            "mt-3 text-muted",
+            !featured && "flex-1",
+            featured ? "max-w-[36rem] text-[16px]/[1.62]" : "text-[15px]/[1.6]",
           )}
         >
           {project.description}
         </p>
 
         {project.note ? (
-          <p className="mt-4 rounded-lg border border-line bg-surface px-3.5 py-2.5 text-[13px] leading-relaxed text-navy">
+          <p className="mt-5 max-w-[36rem] rounded-lg border border-line bg-surface px-4 py-3 text-[14px]/[1.55] text-navy">
             {project.note}
           </p>
         ) : null}
 
         {project.disclaimer ? (
-          <p className="mt-2 text-xs leading-relaxed text-muted italic">
+          <p className="mt-2 text-[13px]/[1.55] text-muted italic">
             {project.disclaimer}
           </p>
         ) : null}

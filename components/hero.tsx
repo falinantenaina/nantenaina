@@ -25,7 +25,7 @@ export function Hero() {
             <Reveal delay={70}>
               <h1
                 id={`${sectionIds.hero}-title`}
-                className="mt-7 text-[2.15rem] font-semibold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-[3.4rem] lg:leading-[1.06]"
+                className="mt-8 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.025em] text-navy sm:text-[3rem] lg:text-[3.45rem] lg:leading-[1.04]"
               >
                 Je transforme vos idées en applications web{" "}
                 <span className="text-accent">modernes et performantes.</span>
@@ -33,7 +33,7 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={140}>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              <p className="mt-7 max-w-[34rem] text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
                 Je conçois et développe des sites web et des applications adaptés aux
                 besoins des entreprises. Du frontend au backend, je privilégie des
                 interfaces intuitives, des fonctionnalités fiables et un code
@@ -42,7 +42,7 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={210}>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <ActionLink href={`#${sectionIds.projects}`} size="lg" className="sm:w-auto">
                   Découvrir mes projets
                   <ArrowRight aria-hidden="true" className="size-4" />
@@ -60,10 +60,10 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={280}>
-              <p className="mt-8 flex items-start gap-2.5 text-sm text-muted">
+              <p className="mt-7 flex items-start gap-2.5 text-sm/[1.6] text-muted">
                 <span
                   aria-hidden="true"
-                  className="ticker-dot mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent"
+                  className="ticker-dot mt-[7px] h-2 w-2 shrink-0 rounded-full bg-accent"
                 />
                 Ouvert aux missions freelance et aux opportunités professionnelles.
               </p>
@@ -74,13 +74,9 @@ export function Hero() {
             <Reveal delay={120} className="relative mx-auto w-full max-w-sm lg:max-w-none">
               <span
                 aria-hidden="true"
-                className="absolute -right-3 -top-3 bottom-8 left-8 hidden rounded-3xl bg-surface sm:block"
+                className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-surface"
               />
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-6 -left-6 h-28 w-28 rounded-3xl border border-accent/25"
-              />
-              <div className="relative overflow-hidden rounded-3xl border border-line bg-surface shadow-card">
+              <div className="relative overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
                 <div className="relative aspect-4/5 w-full">
                   <Image
                     src={site.photo.src}

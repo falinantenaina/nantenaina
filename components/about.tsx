@@ -22,6 +22,7 @@ export function About() {
     <Section
       id={sectionIds.about}
       eyebrow="À propos"
+      index="01"
       title="Un développeur orienté solutions"
       className="border-b border-line"
     >

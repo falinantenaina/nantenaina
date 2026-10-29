@@ -62,6 +62,7 @@ export function Experience() {
     <Section
       id={sectionIds.experience}
       eyebrow="Expérience"
+      index="04"
       title="Un parcours en continu"
       description="Trois environnements complémentaires : l’entreprise, l’indépendance et le développement produit."
       className="border-b border-line bg-surface/45"

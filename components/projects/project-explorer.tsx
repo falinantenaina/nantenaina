@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { ProjectCard } from "@/components/projects/project-card";
 import {
   projectCategories,
   projects,
   type ProjectCategoryId,
 } from "@/lib/data/projects";
-import { ProjectCard } from "@/components/projects/project-card";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 type FilterId = ProjectCategoryId | "all";
 
@@ -24,7 +24,6 @@ export function ProjectExplorer() {
       ? projects
       : projects.filter((project) => project.categories.includes(active));
 
-  /** Projets phares d’abord, ordre d’origine conservé à l’intérieur de chaque groupe. */
   const visibleProjects = [...filtered].sort(
     (a, b) => Number(b.featured === true) - Number(a.featured === true),
   );
@@ -58,11 +57,7 @@ export function ProjectExplorer() {
           })}
         </div>
 
-        <p
-          className="text-sm text-muted"
-          role="status"
-          aria-live="polite"
-        >
+        <p className="text-sm text-muted" role="status" aria-live="polite">
           {visibleProjects.length}{" "}
           {visibleProjects.length > 1 ? "projets affichés" : "projet affiché"}
         </p>

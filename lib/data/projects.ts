@@ -30,24 +30,14 @@ export type Project = {
   name: string;
   description: string;
   categories: ProjectCategoryId[];
-  /** Technologies réellement confirmées. Laisser vide plutôt que de supposer. */
   technologies: string[];
   links: ProjectLink[];
-  /**
-   * Chemin vers une capture authentique dans `public/images/projects/`.
-   * Lorsqu’il est absent, un aperçu illustratif est généré à la place.
-   * Remplacer ce chemin suffit pour changer le visuel affiché.
-   */
+
   image?: string;
-  /** Texte alternatif décrivant la capture réelle affichée. */
   imageAlt?: string;
-  /** Variante de l’aperçu illustratif affiché en l’absence de capture. */
   visual: ProjectVisualVariant;
-  /** Met le projet en avant : carte pleine largeur, mise en page horizontale. */
   featured?: boolean;
-  /** Mention factuelle optionnelle affichée sous la description. */
   note?: string;
-  /** Mention du rôle, lorsque l’on n’est pas l’auteur unique. */
   disclaimer?: string;
 };
 
@@ -69,6 +59,7 @@ export const projects: Project[] = [
     ],
     visual: "itad",
     featured: true,
+    image: "/images/projects/itad.webp",
     note: "Environ 18 000 téléchargements au cours du premier mois, selon les chiffres communiqués.",
     disclaimer: "Projet réalisé en équipe au sein d’ITAD.mg.",
   },
@@ -79,7 +70,13 @@ export const projects: Project[] = [
       "Site e-commerce avec catalogue de produits, catégories et interface responsive.",
     categories: ["ecommerce"],
     technologies: ["React", "Vite", "Tailwind CSS", "MySQL"],
-    links: [{ label: "Voir le site", href: "https://ets-housseni.com/", kind: "site" }],
+    links: [
+      {
+        label: "Voir le site",
+        href: "https://ets-housseni.com/",
+        kind: "site",
+      },
+    ],
     visual: "housseni",
     featured: true,
     image: "/images/projects/ets-housseni.webp",
@@ -94,7 +91,11 @@ export const projects: Project[] = [
     categories: ["frontend", "web-apps"],
     technologies: [],
     links: [
-      { label: "Voir le site", href: "https://estatein-mg.netlify.app/", kind: "site" },
+      {
+        label: "Voir le site",
+        href: "https://estatein-mg.netlify.app/",
+        kind: "site",
+      },
     ],
     visual: "estatein",
     image: "/images/projects/estatein-mg.webp",
@@ -109,7 +110,11 @@ export const projects: Project[] = [
     categories: ["web-apps"],
     technologies: ["React", "TypeScript", "Vite", "API TMDB"],
     links: [
-      { label: "Voir le site", href: "https://movie-mg.vercel.app/", kind: "site" },
+      {
+        label: "Voir le site",
+        href: "https://movie-mg.vercel.app/",
+        kind: "site",
+      },
     ],
     visual: "movie",
     image: "/images/projects/movie-mg.webp",
@@ -124,7 +129,11 @@ export const projects: Project[] = [
     categories: ["web-apps", "frontend"],
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
     links: [
-      { label: "Voir le site", href: "https://swrnym.vercel.app/", kind: "site" },
+      {
+        label: "Voir le site",
+        href: "https://swrnym.vercel.app/",
+        kind: "site",
+      },
     ],
     visual: "swrynym",
     image: "/images/projects/swrynym.webp",
@@ -139,7 +148,11 @@ export const projects: Project[] = [
     categories: ["ecommerce", "frontend"],
     technologies: ["React", "Vite"],
     links: [
-      { label: "Voir le site", href: "https://3legant-roan.vercel.app/", kind: "site" },
+      {
+        label: "Voir le site",
+        href: "https://3legant-roan.vercel.app/",
+        kind: "site",
+      },
     ],
     visual: "3legant",
     image: "/images/projects/3legant.webp",
@@ -148,7 +161,6 @@ export const projects: Project[] = [
   },
 ];
 
-/** Projets sans capture réelle : leur visuel est un aperçu illustratif. */
 export const projectsWithoutScreenshot: string[] = projects
   .filter((project) => !project.image)
   .map((project) => project.name);

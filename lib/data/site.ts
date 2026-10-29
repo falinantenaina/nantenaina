@@ -9,15 +9,9 @@ export const site = {
   },
 } as const;
 
-/**
- * Coordonnées à configurer avant publication.
- * Laisser une chaîne vide masque le lien correspondant côté interface.
- */
 export const contact = {
-  /** Ex. "contact@exemple.com" */
-  email: "",
-  /** Ex. "https://www.linkedin.com/in/…" */
-  linkedin: "",
+  email: "nantenainaranaivojaona96@gmail.com",
+  linkedin: "https://www.linkedin.com/in/falinantenaina-ranaivojaona-42ba8133b",
   github: "https://github.com/falinantenaina",
   portfolio: "https://nantenaina.is-a.dev/",
 } as const;

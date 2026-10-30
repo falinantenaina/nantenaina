@@ -1,7 +1,7 @@
+import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 import { experiences, type ExperienceItem } from "@/lib/data/experience";
 import { sectionIds } from "@/lib/data/site";
-import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
 function Marker({ muted = false }: { muted?: boolean }) {
@@ -52,7 +52,9 @@ function ExperienceCard({
         {item.company}
       </h3>
       <p className="mt-1 text-sm font-medium text-accent">{item.role}</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted">
+        {item.description}
+      </p>
     </div>
   );
 }
@@ -70,7 +72,7 @@ export function Experience() {
       <ol className="relative">
         <span
           aria-hidden="true"
-          className="absolute bottom-4 left-2 top-3 w-px bg-gradient-to-b from-accent/60 via-line to-transparent sm:left-3"
+          className="absolute bottom-4 left-2 top-3 w-px bg-linear-to-b from-accent/60 via-line to-transparent sm:left-3"
         />
 
         {experiences.map((item, index) => (

@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { navigation } from "@/lib/data/navigation";
-import { sectionIds, site } from "@/lib/data/site";
 import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
+import { navigation } from "@/lib/data/navigation";
+import { sectionIds, site } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -66,7 +66,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-md">
       <nav aria-label="Navigation principale">
         <Container>
-          <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
+          <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
             <a
               href={`#${sectionIds.hero}`}
               className="group flex items-center gap-3 rounded-md"
@@ -155,7 +155,9 @@ export function SiteHeader() {
                       onClick={() => setOpen(false)}
                       className={cn(
                         "flex items-center justify-between py-4 text-base font-medium transition-colors",
-                        isActive ? "text-accent" : "text-navy hover:text-accent",
+                        isActive
+                          ? "text-accent"
+                          : "text-navy hover:text-accent",
                       )}
                     >
                       {item.label}

@@ -1,12 +1,12 @@
-import { ArrowUpRight, Download, Star } from "lucide-react";
+import { ProjectVisual } from "@/components/projects/project-visual";
+import { ActionLink } from "@/components/ui/action";
 import {
   projectCategories,
   type Project,
   type ProjectCategoryId,
 } from "@/lib/data/projects";
-import { ProjectVisual } from "@/components/projects/project-visual";
-import { ActionLink } from "@/components/ui/action";
 import { cn } from "@/lib/utils";
+import { ArrowUpRight, Download, Star } from "lucide-react";
 
 function categoryLabel(id: ProjectCategoryId): string {
   return projectCategories.find((category) => category.id === id)?.label ?? id;
@@ -27,7 +27,8 @@ export function ProjectCard({ project }: { project: Project }) {
       <ProjectVisual
         project={project}
         className={cn(
-          featured && "md:aspect-auto md:h-full md:min-h-full md:border-b-0 md:border-r md:border-line",
+          featured &&
+            "md:aspect-auto md:h-full md:min-h-full md:border-b-0 md:border-r md:border-line",
         )}
       />
 
@@ -57,7 +58,9 @@ export function ProjectCard({ project }: { project: Project }) {
         <h3
           className={cn(
             "mt-4 font-semibold tracking-[-0.015em] text-navy",
-            featured ? "text-2xl/[1.2] sm:text-[1.75rem]/[1.18]" : "text-xl/[1.25]",
+            featured
+              ? "text-2xl/[1.2] sm:text-[1.75rem]/[1.18]"
+              : "text-xl/tight",
           )}
         >
           {project.name}
@@ -67,14 +70,14 @@ export function ProjectCard({ project }: { project: Project }) {
           className={cn(
             "mt-3 text-muted",
             !featured && "flex-1",
-            featured ? "max-w-[36rem] text-[16px]/[1.62]" : "text-[15px]/[1.6]",
+            featured ? "max-w-xl text-[16px]/[1.62]" : "text-[15px]/[1.6]",
           )}
         >
           {project.description}
         </p>
 
         {project.note ? (
-          <p className="mt-5 max-w-[36rem] rounded-lg border border-line bg-surface px-4 py-3 text-[14px]/[1.55] text-navy">
+          <p className="mt-5 max-w-xl rounded-lg border border-line bg-surface px-4 py-3 text-[14px]/[1.55] text-navy">
             {project.note}
           </p>
         ) : null}

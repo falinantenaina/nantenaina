@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { ArrowRight, Mail } from "lucide-react";
-import { sectionIds, site } from "@/lib/data/site";
 import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { sectionIds, site } from "@/lib/data/site";
+import { ArrowRight, Mail } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -17,7 +17,10 @@ export function Hero() {
           <div className="lg:col-span-7">
             <Reveal>
               <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-navy">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-accent"
+                />
                 Développeur web Full Stack
               </p>
             </Reveal>
@@ -25,7 +28,7 @@ export function Hero() {
             <Reveal delay={70}>
               <h1
                 id={`${sectionIds.hero}-title`}
-                className="mt-8 text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.025em] text-navy sm:text-[3rem] lg:text-[3.45rem] lg:leading-[1.04]"
+                className="mt-8 text-[2.25rem] font-semibold leading-[1.08] tracking-tight text-navy sm:text-[3rem] lg:text-[3.45rem] lg:leading-[1.04]"
               >
                 Je transforme vos idées en applications web{" "}
                 <span className="text-accent">modernes et performantes.</span>
@@ -33,17 +36,21 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={140}>
-              <p className="mt-7 max-w-[34rem] text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
-                Je conçois et développe des sites web et des applications adaptés aux
-                besoins des entreprises. Du frontend au backend, je privilégie des
-                interfaces intuitives, des fonctionnalités fiables et un code
-                maintenable.
+              <p className="mt-7 max-w-136 text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
+                Je conçois et développe des sites web et des applications
+                adaptés aux besoins des entreprises. Du frontend au backend, je
+                privilégie des interfaces intuitives, des fonctionnalités
+                fiables et un code maintenable.
               </p>
             </Reveal>
 
             <Reveal delay={210}>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ActionLink href={`#${sectionIds.projects}`} size="lg" className="sm:w-auto">
+                <ActionLink
+                  href={`#${sectionIds.projects}`}
+                  size="lg"
+                  className="sm:w-auto"
+                >
                   Découvrir mes projets
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </ActionLink>
@@ -63,15 +70,19 @@ export function Hero() {
               <p className="mt-7 flex items-start gap-2.5 text-sm/[1.6] text-muted">
                 <span
                   aria-hidden="true"
-                  className="ticker-dot mt-[7px] h-2 w-2 shrink-0 rounded-full bg-accent"
+                  className="ticker-dot mt-1.75 h-2 w-2 shrink-0 rounded-full bg-accent"
                 />
-                Ouvert aux missions freelance et aux opportunités professionnelles.
+                Ouvert aux missions freelance et aux opportunités
+                professionnelles.
               </p>
             </Reveal>
           </div>
 
           <div className="lg:col-span-5">
-            <Reveal delay={120} className="relative mx-auto w-full max-w-sm lg:max-w-none">
+            <Reveal
+              delay={120}
+              className="relative mx-auto w-full max-w-sm lg:max-w-none"
+            >
               <span
                 aria-hidden="true"
                 className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-surface"

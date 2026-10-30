@@ -1,11 +1,11 @@
 export const site = {
-  initials: "FR",
-  firstName: "Falinantenaina",
-  fullName: "Falinantenaina Ranaivojaona",
+  initials: "NR",
+  firstName: "Nantenaina",
+  fullName: "Nantenaina Ranaivojaona",
   role: "Développeur Web Full Stack",
   photo: {
     src: "/images/profil.jpg",
-    alt: "Portrait de Falinantenaina Ranaivojaona, développeur web full stack, portant une veste bleu marine.",
+    alt: "Portrait de Nantenaina Ranaivojaona, développeur web full stack, portant une veste bleu marine.",
   },
 } as const;
 

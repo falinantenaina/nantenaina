@@ -15,7 +15,7 @@ const siteUrl = "https://nantenaina.is-a.dev";
 
 const pageTitle = `${site.fullName} | ${site.role}`;
 const pageDescription =
-  "Portfolio de Falinantenaina Ranaivojaona, développeur web Full Stack : React, Next.js, TypeScript, Node.js, Express, Prisma et bases de données. Conception de sites web et d’applications sur mesure, missions freelance et opportunités professionnelles à distance.";
+  "Portfolio de Nantenaina Ranaivojaona, développeur web Full Stack : React, Next.js, TypeScript, Node.js, Express, Prisma et bases de données. Conception de sites web et d’applications sur mesure, missions freelance et opportunités professionnelles à distance.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

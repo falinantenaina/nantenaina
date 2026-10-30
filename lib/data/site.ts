@@ -4,7 +4,7 @@ export const site = {
   fullName: "Nantenaina Ranaivojaona",
   role: "Développeur Web Full Stack",
   photo: {
-    src: "/images/profil.jpg",
+    src: "/images/profil.webp",
     alt: "Portrait de Nantenaina Ranaivojaona, développeur web full stack, portant une veste bleu marine.",
   },
 } as const;

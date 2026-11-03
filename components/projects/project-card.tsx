@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <article
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition-[border-color,box-shadow] duration-300 hover:shadow-card",
+        "group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-white transition-[border-color,box-shadow] duration-300 hover:shadow-card",
         featured
           ? "border-accent/35 hover:border-accent/60 md:grid md:grid-cols-[1.05fr_1fr]"
           : "border-line hover:border-accent/40",
@@ -27,6 +27,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <ProjectVisual
         project={project}
         className={cn(
+          "min-w-0",
           featured &&
             "md:aspect-auto md:h-full md:min-h-full md:border-b-0 md:border-r md:border-line",
         )}
@@ -34,7 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div
         className={cn(
-          "flex flex-1 flex-col",
+          "flex min-w-0 flex-1 flex-col",
           featured ? "justify-center p-6 sm:p-8 lg:p-10" : "p-6",
         )}
       >

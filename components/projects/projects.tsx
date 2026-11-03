@@ -20,7 +20,7 @@ export function Projects() {
       headerAside={
         projectsWithoutScreenshot.length > 0 ? (
           <Reveal>
-            <p className="max-w-xs rounded-xl border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted lg:text-right">
+            <p className="max-w-xs min-w-0 rounded-xl border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted lg:text-right">
               {projectsWithoutScreenshot.length === projects.length
                 ? "Les visuels ci-dessous sont des aperçus illustratifs. De véritables captures d’écran pourront y être ajoutées ultérieurement."
                 : `Aperçu illustratif pour ${projectsWithoutScreenshot.join(", ")} : le site bloque toute capture automatisée. Les autres visuels sont de véritables captures d’écran.`}

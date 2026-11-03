@@ -27,7 +27,7 @@ export function About() {
       className="border-b border-line"
     >
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="space-y-5 lg:col-span-7">
+        <div className="space-y-5 lg:col-span-7 min-w-0">
           {paragraphs.map((paragraph, index) => (
             <Reveal key={index} delay={index * 60}>
               <p className="text-base leading-relaxed text-muted sm:text-[17px]">
@@ -37,7 +37,7 @@ export function About() {
           ))}
         </div>
 
-        <ul className="grid gap-4 lg:col-span-5">
+        <ul className="grid min-w-0 gap-4 lg:col-span-5">
           {expertiseDomains.map((domain, index) => {
             const Icon = icons[domain.icon];
             return (

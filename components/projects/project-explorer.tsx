@@ -34,7 +34,7 @@ export function ProjectExplorer() {
         <div
           role="group"
           aria-label="Filtrer les projets par catégorie"
-          className="flex flex-wrap gap-2"
+          className="flex min-w-0 flex-wrap gap-2"
         >
           {filters.map((filter) => {
             const isActive = active === filter.id;
@@ -57,7 +57,7 @@ export function ProjectExplorer() {
           })}
         </div>
 
-        <p className="text-sm text-muted" role="status" aria-live="polite">
+        <p className="min-w-0 shrink-0 text-sm text-muted" role="status" aria-live="polite">
           {visibleProjects.length}{" "}
           {visibleProjects.length > 1 ? "projets affichés" : "projet affiché"}
         </p>
@@ -67,7 +67,7 @@ export function ProjectExplorer() {
         {visibleProjects.map((project) => (
           <li
             key={project.slug}
-            className={cn("h-full", project.featured && "md:col-span-2")}
+            className={cn("h-full min-w-0", project.featured && "md:col-span-2")}
           >
             <ProjectCard project={project} />
           </li>

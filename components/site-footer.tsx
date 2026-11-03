@@ -16,7 +16,7 @@ export function SiteFooter() {
     <footer className="bg-navy text-white">
       <Container className="py-14 sm:py-16">
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-5">
+          <div className="min-w-0 md:col-span-5">
             <div className="flex items-center gap-3">
               <span
                 aria-hidden="true"
@@ -34,7 +34,7 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Sections" className="md:col-span-4">
+          <nav aria-label="Sections" className="min-w-0 md:col-span-4">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
               Navigation
             </h2>
@@ -52,7 +52,7 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <div className="md:col-span-3">
+          <div className="min-w-0 md:col-span-3">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
               Ailleurs
             </h2>

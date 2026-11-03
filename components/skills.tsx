@@ -4,6 +4,7 @@ import { skillGroups, type SkillGroupId } from "@/lib/data/skills";
 import { sectionIds } from "@/lib/data/site";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { cn } from "@/lib/utils";
 
 const icons: Record<SkillGroupId, LucideIcon> = {
   frontend: Layout,
@@ -31,7 +32,7 @@ export function Skills() {
             <Reveal
               key={group.id}
               delay={(index % 3) * 70}
-              className={isLastRowWide ? "sm:col-span-2" : undefined}
+              className={cn("min-w-0", isLastRowWide && "sm:col-span-2")}
             >
               <article className="h-full rounded-xl border border-line bg-white p-6 transition-colors duration-200 hover:border-accent/35">
                 <div className="flex items-center gap-3">

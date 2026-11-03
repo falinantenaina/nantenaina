@@ -69,7 +69,7 @@ export function Contact() {
     >
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <Reveal>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
                 <span aria-hidden="true" className="tabular-nums text-muted">
@@ -126,7 +126,7 @@ export function Contact() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <Reveal delay={60}>
               <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-muted">
                 Envoyer un message

@@ -132,7 +132,7 @@ export function ContactForm() {
       ref={formRef}
       noValidate
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
+      className="min-w-0 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
     >
       {!contact.email ? (
         <p className="mb-6 flex items-start gap-2.5 rounded-lg border border-line bg-surface px-4 py-3 text-[13px] leading-relaxed text-navy">
@@ -148,14 +148,17 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid min-w-0 gap-5 sm:grid-cols-2">
         {textFields.map((field) => {
           const error = errorFor(field.id);
           const errorId = `${field.id}-error`;
           return (
             <div
               key={field.id}
-              className={field.id === "subject" ? "sm:col-span-2" : undefined}
+              className={cn(
+                "min-w-0",
+                field.id === "subject" && "sm:col-span-2",
+              )}
             >
               <label
                 htmlFor={field.id}
@@ -193,7 +196,7 @@ export function ContactForm() {
           );
         })}
 
-        <div className="sm:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <label
             htmlFor="message"
             className="mb-1.5 block text-sm font-medium text-navy"
@@ -234,7 +237,7 @@ export function ContactForm() {
           Envoyer le message
           <ArrowRight aria-hidden="true" className="size-4" />
         </ActionButton>
-        <p className="text-xs leading-relaxed text-muted sm:max-w-[16rem] sm:text-right">
+        <p className="min-w-0 text-xs leading-relaxed text-muted sm:max-w-[16rem] sm:text-right">
           Votre messagerie s’ouvre avec le message prérempli.
         </p>
       </div>

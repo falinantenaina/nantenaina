@@ -14,7 +14,7 @@ export function Hero() {
     >
       <Container className="py-16 sm:py-20 lg:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <Reveal>
               <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-navy">
                 <span
@@ -78,7 +78,7 @@ export function Hero() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <Reveal
               delay={120}
               className="relative mx-auto w-full max-w-sm lg:max-w-none"

@@ -33,7 +33,7 @@ export function Section({
     >
       <Container>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             {eyebrow ? (
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
                 {index ? (
@@ -62,7 +62,7 @@ export function Section({
             ) : null}
           </div>
           {headerAside ? (
-            <div className="lg:col-span-5 lg:justify-self-end">{headerAside}</div>
+            <div className="min-w-0 lg:col-span-5 lg:justify-self-end">{headerAside}</div>
           ) : null}
         </div>
         <div className="mt-12">{children}</div>

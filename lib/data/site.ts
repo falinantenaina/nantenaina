@@ -10,10 +10,10 @@ export const site = {
 } as const;
 
 export const contact = {
-  email: "nantenainaranaivojaona96@gmail.com",
+  email: "contact@nantenaina.com",
   linkedin: "https://www.linkedin.com/in/falinantenaina-ranaivojaona-42ba8133b",
   github: "https://github.com/falinantenaina",
-  portfolio: "https://nantenaina.is-a.dev/",
+  portfolio: "https://nantenaina.com",
 } as const;
 
 export const sectionIds = {

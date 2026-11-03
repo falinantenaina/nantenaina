@@ -1,9 +1,9 @@
-import { ArrowUpRight, Globe, Mail } from "lucide-react";
-import { contact, sectionIds } from "@/lib/data/site";
-import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { ContactForm } from "@/components/contact/contact-form";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/brand-icons";
+import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
+import { contact, sectionIds } from "@/lib/data/site";
+import { ArrowUpRight, Globe, Mail } from "lucide-react";
 
 type LinkItem = {
   id: string;
@@ -24,7 +24,7 @@ const links: LinkItem[] = [
   {
     id: "portfolio",
     label: "Portfolio actuel",
-    value: "nantenaina.is-a.dev",
+    value: "nantenaina.com",
     href: contact.portfolio,
     icon: "link",
   },
@@ -87,9 +87,9 @@ export function Contact() {
                 Parlons de votre prochain projet.
               </h2>
               <p className="mt-5 max-w-md text-[16px]/[1.65] text-muted">
-                Vous avez besoin d’un site web, d’une application ou d’une solution
-                adaptée à votre activité ? Contactez-moi pour discuter de votre
-                besoin.
+                Vous avez besoin d’un site web, d’une application ou d’une
+                solution adaptée à votre activité ? Contactez-moi pour discuter
+                de votre besoin.
               </p>
             </Reveal>
 

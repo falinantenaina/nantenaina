@@ -1,22 +1,34 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
-import { AlertCircle, ArrowRight, CheckCircle2, MailWarning } from "lucide-react";
-import { contact, site } from "@/lib/data/site";
+import {
+  useCallback,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
+import {
+  AlertCircle,
+  ArrowRight,
+  CheckCircle2,
+  LoaderCircle,
+  MailWarning,
+} from "lucide-react";
+import { submitContact } from "@/lib/actions/contact";
+import {
+  hasErrors,
+  initialFormState,
+  initialValues,
+  validate,
+  type Errors,
+  type FieldId,
+  type FormState,
+  type Values,
+} from "@/lib/contact/validation";
+import { contact } from "@/lib/data/site";
 import { ActionButton } from "@/components/ui/action";
 import { cn } from "@/lib/utils";
-
-type FieldId = "name" | "email" | "subject" | "message";
-type Values = Record<FieldId, string>;
-type Errors = Partial<Record<FieldId, string>>;
-type Status = "idle" | "invalid" | "unconfigured" | "sent";
-
-const initialValues: Values = {
-  name: "",
-  email: "",
-  subject: "",
-  message: "",
-};
 
 const textFields: {
   id: Exclude<FieldId, "message">;
@@ -48,91 +60,121 @@ const textFields: {
   },
 ];
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-function validate(values: Values): Errors {
-  const errors: Errors = {};
-  const name = values.name.trim();
-  const email = values.email.trim();
-  const subject = values.subject.trim();
-  const message = values.message.trim();
-
-  if (name.length < 2) errors.name = "Merci d’indiquer votre nom.";
-  if (!emailPattern.test(email)) {
-    errors.email = "Merci d’indiquer une adresse e-mail valide.";
-  }
-  if (subject.length < 2) errors.subject = "Merci d’indiquer un objet.";
-  if (message.length < 10) {
-    errors.message = "Votre message doit contenir au moins 10 caractères.";
-  }
-
-  return errors;
-}
-
 const fieldClass =
   "block w-full rounded-lg border bg-white px-4 py-3 text-[15px] text-ink transition-colors placeholder:text-muted/55 focus:outline-none focus:ring-2 focus:ring-accent/20";
+
+/** Lit les champs depuis le `FormData` réellement soumis. */
+function readValues(formData: FormData): Values {
+  const read = (key: FieldId): string => {
+    const value = formData.get(key);
+    return typeof value === "string" ? value : "";
+  };
+
+  return {
+    name: read("name"),
+    email: read("email"),
+    subject: read("subject"),
+    message: read("message"),
+  };
+}
 
 export function ContactForm() {
   const [values, setValues] = useState<Values>(initialValues);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<Status>("idle");
+  const [honeypot, setHoneypot] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
+  const mountedAt = useRef(0);
+
+  /** Horodatage du rendu : un `Date.now()` dans le rendu serait impur. */
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
+
+  const focusFirstInvalid = useCallback((list: Errors) => {
+    const first = (Object.keys(list) as FieldId[]).find((key) => list[key]);
+    if (!first) return;
+    formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+  }, []);
+
+  /**
+   * Point de coordination : validation locale avant tout appel réseau, puis
+   * application du retour serveur. `useActionState` ne fournit pas de callback,
+   * d'où cet enveloppement.
+   */
+  const handleAction = useCallback(
+    async (previous: FormState, formData: FormData): Promise<FormState> => {
+      // Horodatage de rendu, calculé ici plutôt que par un effet d'état.
+      // Champ absent côté serveur si le rendu n'a pas encore eu lieu : contrôle
+      // volontairement défaillant-côté-sûr.
+      formData.set(
+        "startedAt",
+        mountedAt.current > 0
+          ? String(Math.max(0, Date.now() - mountedAt.current))
+          : "0",
+      );
+
+      const submitted = readValues(formData);
+      const validation = validate(submitted);
+
+      if (hasErrors(validation)) {
+        setErrors(validation);
+        focusFirstInvalid(validation);
+        return { status: "error", fieldErrors: validation };
+      }
+
+      const result = await submitContact(previous, formData);
+
+      if (result.status === "success") {
+        setValues(initialValues);
+        setErrors({});
+      } else if (result.fieldErrors) {
+        setErrors(result.fieldErrors);
+        focusFirstInvalid(result.fieldErrors);
+      }
+
+      return result;
+    },
+    [focusFirstInvalid],
+  );
+
+  const [state, formAction, pending] = useActionState(
+    handleAction,
+    initialFormState,
+  );
 
   const updateValue = (field: FieldId, value: string) => {
     setValues((current) => ({ ...current, [field]: value }));
-    setErrors((current) => (current[field] ? { ...current, [field]: undefined } : current));
-    setStatus((current) => (current === "idle" ? current : "idle"));
+    setErrors((current) =>
+      current[field] ? { ...current, [field]: undefined } : current,
+    );
   };
 
+  /**
+   * Validation immédiate : si elle échoue, la soumission est annulée et rien
+   * n'est envoyé. `handleAction` refait la même vérification, ce qui couvre le
+   * cas où React traiterait malgré tout l'événement.
+   */
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
     const validation = validate(values);
-    if (Object.values(validation).some(Boolean)) {
+    if (hasErrors(validation)) {
+      event.preventDefault();
       setErrors(validation);
-      setStatus("invalid");
-      const firstInvalid = (Object.keys(validation) as FieldId[]).find(
-        (key) => validation[key],
-      );
-      const element = formRef.current?.querySelector<HTMLElement>(
-        `[name="${firstInvalid}"]`,
-      );
-      element?.focus();
-      return;
+      focusFirstInvalid(validation);
     }
-
-    if (!contact.email) {
-      setStatus("unconfigured");
-      return;
-    }
-
-    const body = [
-      `Bonjour ${site.firstName},`,
-      "",
-      values.message.trim(),
-      "",
-      "—",
-      `Nom : ${values.name.trim()}`,
-      `E-mail : ${values.email.trim()}`,
-    ].join("\n");
-
-    const href =
-      `mailto:${contact.email}` +
-      `?subject=${encodeURIComponent(values.subject.trim())}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = href;
-    setStatus("sent");
   };
 
-  const errorFor = (field: FieldId) => errors[field];
+  const status = state.status;
+  const fieldError = (field: FieldId) => errors[field];
+  const message = state.message;
 
   return (
     <form
       ref={formRef}
       noValidate
+      action={formAction}
       onSubmit={handleSubmit}
-      className="min-w-0 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
+      aria-busy={pending || undefined}
+      className="relative min-w-0 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
     >
       {!contact.email ? (
         <p className="mb-6 flex items-start gap-2.5 rounded-lg border border-line bg-surface px-4 py-3 text-[13px] leading-relaxed text-navy">
@@ -148,17 +190,31 @@ export function ContactForm() {
         </p>
       ) : null}
 
+      {/* Piège à robots : invisible pour les humains, rempli par les automates. */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+      >
+        <label htmlFor="website">Ne pas remplir ce champ</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+        />
+      </div>
+
       <div className="grid min-w-0 gap-5 sm:grid-cols-2">
         {textFields.map((field) => {
-          const error = errorFor(field.id);
+          const error = fieldError(field.id);
           const errorId = `${field.id}-error`;
           return (
             <div
               key={field.id}
-              className={cn(
-                "min-w-0",
-                field.id === "subject" && "sm:col-span-2",
-              )}
+              className={cn("min-w-0", field.id === "subject" && "sm:col-span-2")}
             >
               <label
                 htmlFor={field.id}
@@ -176,6 +232,7 @@ export function ContactForm() {
                 onChange={(event) => updateValue(field.id, event.target.value)}
                 aria-invalid={error ? true : undefined}
                 aria-describedby={error ? errorId : undefined}
+                disabled={pending}
                 className={cn(
                   fieldClass,
                   error
@@ -212,6 +269,7 @@ export function ContactForm() {
             onChange={(event) => updateValue("message", event.target.value)}
             aria-invalid={errors.message ? true : undefined}
             aria-describedby={errors.message ? "message-error" : undefined}
+            disabled={pending}
             className={cn(
               fieldClass,
               "resize-y leading-relaxed",
@@ -233,36 +291,32 @@ export function ContactForm() {
       </div>
 
       <div className="mt-7 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <ActionButton type="submit" size="lg" className="w-full sm:w-auto">
-          Envoyer le message
-          <ArrowRight aria-hidden="true" className="size-4" />
+        <ActionButton type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
+          {pending ? (
+            <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
+          ) : (
+            <ArrowRight aria-hidden="true" className="size-4" />
+          )}
+          {pending ? "Envoi en cours…" : "Envoyer le message"}
         </ActionButton>
         <p className="min-w-0 text-xs leading-relaxed text-muted sm:max-w-[16rem] sm:text-right">
-          Votre messagerie s’ouvre avec le message prérempli.
+          Réponse sous 48 heures ouvrées. Vos coordonnées ne servent qu’à vous
+          répondre.
         </p>
       </div>
 
       <div role="status" aria-live="polite" className="mt-4 min-h-6">
-        {status === "invalid" ? (
-          <p className="flex items-center gap-2 text-sm font-medium text-danger">
-            <AlertCircle aria-hidden="true" className="size-4" />
-            Certains champs sont incomplets ou invalides.
+        {status === "error" ? (
+          <p className="flex items-start gap-2 text-sm font-medium text-danger">
+            <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+            {message}
           </p>
         ) : null}
 
-        {status === "unconfigured" ? (
-          <p className="flex items-center gap-2 text-sm font-medium text-danger">
-            <AlertCircle aria-hidden="true" className="size-4" />
-            L’envoi n’est pas encore activé sur ce portfolio. Utilisez les liens
-            à côté du formulaire pour me contacter.
-          </p>
-        ) : null}
-
-        {status === "sent" ? (
-          <p className="flex items-center gap-2 text-sm font-medium text-success">
-            <CheckCircle2 aria-hidden="true" className="size-4" />
-            Votre messagerie vient de s’ouvrir : il ne reste qu’à envoyer le
-            message.
+        {status === "success" ? (
+          <p className="flex items-start gap-2 text-sm font-medium text-success">
+            <CheckCircle2 aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+            {message}
           </p>
         ) : null}
       </div>

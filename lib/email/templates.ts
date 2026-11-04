@@ -119,10 +119,12 @@ export function notificationMail(
 /** Accusé de réception envoyé au visiteur. */
 export function confirmationMail(payload: ContactPayload, replyTo: string): Mail {
   const subject = `Votre message a bien été envoyé`;
+  // Prénom et nom du visiteur en capitales, y compris les accents (é → É).
+  const recipient = payload.name.trim().toLocaleUpperCase("fr-FR");
 
   const body = `
     ${heading("Merci pour votre message")}
-    ${paragraph(`Bonjour ${payload.name.trim()},`)}
+    ${paragraph(`Bonjour ${recipient},`)}
     ${paragraph(
       `Votre message « ${singleLine(payload.subject, 150)} » a bien été transmis. Je reviens vers vous sous 48 heures ouvrées.`,
     )}
@@ -138,7 +140,7 @@ export function confirmationMail(payload: ContactPayload, replyTo: string): Mail
     subject,
     html: shell(subject, body),
     text: [
-      `Bonjour ${payload.name.trim()},`,
+      `Bonjour ${recipient},`,
       "",
       `Votre message « ${payload.subject.trim()} » a bien été transmis. Je reviens vers vous sous 48 heures ouvrées.`,
       "",

@@ -1,6 +1,8 @@
 import { sectionIds } from "@/lib/data/site";
 import { Section } from "@/components/ui/section";
-import { ProjectExplorer } from "@/components/projects/project-explorer";
+import { ProjectCarousel } from "@/components/projects/project-carousel";
+import { ActionLink } from "@/components/ui/action";
+import { ArrowUpRight } from "lucide-react";
 
 export function Projects() {
   return (
@@ -15,9 +17,14 @@ export function Projects() {
           e&#8209;commerce à l’application complète.
         </>
       }
+      headerAside={
+        <ActionLink href="/projets" variant="secondary">
+          Voir tous les projets <ArrowUpRight aria-hidden="true" className="size-4" />
+        </ActionLink>
+      }
       className="bg-surface"
     >
-      <ProjectExplorer />
+      <ProjectCarousel />
     </Section>
   );
 }

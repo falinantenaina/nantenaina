@@ -105,7 +105,7 @@ export function SiteHeader() {
             className="flex h-16 items-center justify-between gap-4 lg:h-18"
           >
             <a
-              href={`#${sectionIds.hero}`}
+              href={`/#${sectionIds.hero}`}
               className="flex min-w-0 items-center gap-3"
               aria-label={`${site.fullName} — retour à l’accueil`}
             >
@@ -132,7 +132,7 @@ export function SiteHeader() {
                 return (
                   <li key={item.href}>
                     <a
-                      href={item.href}
+                      href={`/${item.href}`}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
                         "relative inline-flex h-10 items-center px-3 text-sm font-medium transition-colors duration-200",
@@ -155,7 +155,7 @@ export function SiteHeader() {
 
             <div className="flex shrink-0 items-center gap-2">
               <ActionLink
-                href="#contact"
+                href="/#contact"
                 size="sm"
                 className="hidden lg:inline-flex"
               >
@@ -232,7 +232,7 @@ export function SiteHeader() {
             return (
               <li key={item.href}>
                 <a
-                  href={item.href}
+                  href={`/${item.href}`}
                   aria-current={isActive ? "true" : undefined}
                   onClick={() => setOpen(false)}
                   className={cn(
@@ -257,7 +257,7 @@ export function SiteHeader() {
 
         <div className="shrink-0 border-t border-line p-5">
           <ActionLink
-            href="#contact"
+            href="/#contact"
             size="lg"
             className="w-full"
             onClick={() => setOpen(false)}

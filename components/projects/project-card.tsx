@@ -12,8 +12,8 @@ function categoryLabel(id: ProjectCategoryId): string {
   return projectCategories.find((category) => category.id === id)?.label ?? id;
 }
 
-export function ProjectCard({ project }: { project: Project }) {
-  const featured = project.featured === true;
+export function ProjectCard({ project, compact = false }: { project: Project; compact?: boolean }) {
+  const featured = project.featured === true && !compact;
   const hasLinks = project.links.length > 0;
 
   return (

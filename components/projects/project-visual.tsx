@@ -45,7 +45,10 @@ export function ProjectVisual({
       >
         <Image
           src={project.image}
-          alt={project.imageAlt ?? `Capture de l’interface du projet ${project.name}`}
+          alt={
+            project.imageAlt ??
+            `Capture de l’interface du projet ${project.name}`
+          }
           fill
           sizes="(min-width: 1024px) 720px, (min-width: 768px) 50vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover object-top"

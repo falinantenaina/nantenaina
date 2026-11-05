@@ -34,14 +34,7 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "backend",
     title: "Backend",
-    items: [
-      "Node.js",
-      "Express.js",
-      "API REST",
-      "JWT",
-      "Cookies",
-      "Prisma",
-    ],
+    items: ["Node.js", "Express.js", "API REST", "JWT", "Cookies", "Prisma"],
   },
   {
     id: "databases",

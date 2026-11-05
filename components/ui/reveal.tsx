@@ -26,7 +26,12 @@ type RevealProps = {
  * Le contenu est visible par défaut : seul un navigateur avec JavaScript ajoute
  * l’état « en attente », ce qui garantit que rien n’est jamais masqué sans script.
  */
-export function Reveal({ children, className, delay = 0, once = true }: RevealProps) {
+export function Reveal({
+  children,
+  className,
+  delay = 0,
+  once = true,
+}: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [state, setState] = useState<"idle" | "ready" | "visible">("idle");
 
@@ -58,7 +63,11 @@ export function Reveal({ children, className, delay = 0, once = true }: RevealPr
   return (
     <div
       ref={ref}
-      style={state === "visible" && delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={
+        state === "visible" && delay
+          ? { transitionDelay: `${delay}ms` }
+          : undefined
+      }
       className={cn(
         "reveal",
         state === "ready" && "reveal-pending",

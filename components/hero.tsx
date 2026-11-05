@@ -1,112 +1,68 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { sectionIds, site } from "@/lib/data/site";
-import { ArrowRight, Mail } from "lucide-react";
-import Image from "next/image";
 
 export function Hero() {
   return (
     <section
       id={sectionIds.hero}
-      aria-labelledby={`${sectionIds.hero}-title`}
-      className="scroll-mt-24 border-b border-line bg-canvas"
+      aria-labelledby="accueil-title"
+      className="scroll-mt-24"
     >
-      <Container className="py-16 sm:py-20 lg:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="min-w-0 lg:col-span-7">
-            <Reveal>
-              <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-navy">
-                <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-accent"
-                />
-                Développeur web Full Stack
-              </p>
-            </Reveal>
-
-            <Reveal delay={70}>
-              <h1
-                id={`${sectionIds.hero}-title`}
-                className="mt-8 text-[2.25rem] font-semibold leading-[1.08] tracking-tight text-navy sm:text-[3rem] lg:text-[3.45rem] lg:leading-[1.04]"
-              >
-                Je transforme vos idées en applications web{" "}
-                <span className="text-accent">modernes et performantes.</span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <p className="mt-7 max-w-136 text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
-                Je conçois et développe des sites web et des applications
-                adaptés aux besoins des entreprises. Du frontend au backend, je
-                privilégie des interfaces intuitives, des fonctionnalités
-                fiables et un code maintenable.
-              </p>
-            </Reveal>
-
-            <Reveal delay={210}>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ActionLink
-                  href={`#${sectionIds.projects}`}
-                  size="lg"
-                  className="sm:w-auto"
-                >
-                  Découvrir mes projets
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </ActionLink>
-                <ActionLink
-                  href={`#${sectionIds.contact}`}
-                  variant="secondary"
-                  size="lg"
-                  className="sm:w-auto"
-                >
-                  <Mail aria-hidden="true" className="size-4" />
-                  Me contacter
-                </ActionLink>
-              </div>
-            </Reveal>
-
-            <Reveal delay={280}>
-              <p className="mt-7 flex items-start gap-2.5 text-sm/[1.6] text-muted">
-                <span
-                  aria-hidden="true"
-                  className="ticker-dot mt-1.75 h-2 w-2 shrink-0 rounded-full bg-accent"
-                />
-                Ouvert aux missions freelance et aux opportunités
-                professionnelles.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="min-w-0 lg:col-span-5">
-            <Reveal
-              delay={120}
-              className="relative mx-auto w-full max-w-sm lg:max-w-none"
+      <Container className="py-16 sm:py-24 lg:py-28">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+          <div className="min-w-0">
+            <h1
+              id="accueil-title"
+              className="text-display mt-5 font-semibold text-ink"
             >
+              Je transforme vos idées en applications web{" "}
+              <span className="text-accent">modernes et performantes.</span>
+            </h1>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+              Je conçois et développe des sites web et des applications adaptés
+              aux besoins des entreprises. Du frontend au backend, je privilégie
+              des interfaces intuitives, des fonctionnalités fiables et un code
+              maintenable.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <ActionLink href={`#${sectionIds.projects}`} size="lg">
+                Voir mes projets{" "}
+                <ArrowRight aria-hidden="true" className="size-4" />
+              </ActionLink>
+              <ActionLink
+                href={`#${sectionIds.contact}`}
+                variant="ghost"
+                size="lg"
+              >
+                Me contacter
+              </ActionLink>
+            </div>
+            <p className="mt-8 flex items-center gap-2 text-sm text-muted">
               <span
                 aria-hidden="true"
-                className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-surface"
+                className="size-1.5 rounded-full bg-success"
               />
-              <div className="relative overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
-                <div className="relative aspect-4/5 w-full">
-                  <Image
-                    src={site.photo.src}
-                    alt={site.photo.alt}
-                    fill
-                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 440px, calc(100vw - 40px)"
-                    className="object-cover object-top"
-                    preload
-                  />
-                </div>
-                <div className="flex items-center justify-between gap-3 border-t border-line bg-white px-4 py-3">
-                  <span className="text-xs font-medium text-navy">
-                    {site.fullName}
-                  </span>
-                  <span className="text-xs text-muted">Full Stack</span>
-                </div>
-              </div>
-            </Reveal>
+              Disponible pour des missions freelance
+            </p>
           </div>
+          <figure className="mx-auto w-full max-w-sm lg:max-w-none">
+            <div className="relative aspect-4/5 overflow-hidden rounded-xl bg-surface">
+              <Image
+                src={site.photo.src}
+                alt={site.photo.alt}
+                fill
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 384px, 90vw"
+                className="object-cover object-top"
+                preload
+              />
+            </div>
+            <figcaption className="mt-4 text-sm text-muted">
+              7+ ans d’expérience · Applications web et produits numériques
+            </figcaption>
+          </figure>
         </div>
       </Container>
     </section>

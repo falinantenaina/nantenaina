@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
-      <Skills />
       <Projects />
+      <About />
       <Experience />
+      <Skills />
       <Contact />
     </>
   );

@@ -21,13 +21,6 @@ const links: LinkItem[] = [
     href: contact.github,
     icon: "github",
   },
-  {
-    id: "portfolio",
-    label: "Portfolio actuel",
-    value: "nantenaina.com",
-    href: contact.portfolio,
-    icon: "link",
-  },
   ...(contact.email
     ? [
         {
@@ -71,20 +64,14 @@ export function Contact() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="min-w-0 lg:col-span-5">
             <Reveal>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
-                <span aria-hidden="true" className="tabular-nums text-muted">
-                  05
-                </span>
-                <span aria-hidden="true" className="text-muted/70">
-                  —
-                </span>
+              <p className="flex items-center gap-2 text-sm font-medium">
                 <span className="text-accent">Contact</span>
               </p>
               <h2
                 id={`${sectionIds.contact}-title`}
                 className="mt-3 text-[1.75rem]/[1.16] font-semibold tracking-[-0.02em] text-navy sm:text-[2.125rem]/[1.14]"
               >
-                Parlons de votre prochain projet.
+                Parlons de votre projet.
               </h2>
               <p className="mt-5 max-w-md text-[16px]/[1.65] text-muted">
                 Vous avez besoin d’un site web, d’une application ou d’une
@@ -94,7 +81,7 @@ export function Contact() {
             </Reveal>
 
             <Reveal delay={90}>
-              <ul className="mt-9 divide-y divide-line border-y border-line">
+              <ul className="mt-9 space-y-1">
                 {links.map((link) => (
                   <li key={link.id}>
                     <a

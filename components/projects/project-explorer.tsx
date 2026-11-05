@@ -43,12 +43,13 @@ export function ProjectExplorer() {
                 key={filter.id}
                 type="button"
                 aria-pressed={isActive}
+                aria-controls="project-results"
                 onClick={() => setActive(filter.id)}
                 className={cn(
-                  "inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors duration-200",
+                  "inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-[color,background-color,border-color,transform] duration-150 motion-reduce:transform-none",
                   isActive
-                    ? "border-navy bg-navy text-white"
-                    : "border-line bg-white text-navy hover:border-navy/40 hover:text-accent",
+                    ? "cursor-default border-accent bg-accent text-white"
+                    : "cursor-pointer border-line bg-white text-navy hover:border-accent/40 hover:bg-accent/5 hover:text-accent active:scale-95",
                 )}
               >
                 {filter.label}
@@ -57,17 +58,24 @@ export function ProjectExplorer() {
           })}
         </div>
 
-        <p className="min-w-0 shrink-0 text-sm text-muted" role="status" aria-live="polite">
+        <p
+          className="min-w-0 shrink-0 text-sm text-muted"
+          role="status"
+          aria-live="polite"
+        >
           {visibleProjects.length}{" "}
           {visibleProjects.length > 1 ? "projets affichés" : "projet affiché"}
         </p>
       </div>
 
-      <ul className="mt-10 grid gap-6 md:grid-cols-2">
+      <ul id="project-results" className="mt-10 grid gap-6 md:grid-cols-2">
         {visibleProjects.map((project) => (
           <li
             key={project.slug}
-            className={cn("h-full min-w-0", project.featured && "md:col-span-2")}
+            className={cn(
+              "h-full min-w-0",
+              project.featured && "md:col-span-2",
+            )}
           >
             <ProjectCard project={project} />
           </li>

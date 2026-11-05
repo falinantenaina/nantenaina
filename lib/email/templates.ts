@@ -72,10 +72,7 @@ const timestamp = (date: Date): string =>
   }).format(date);
 
 /** Message reçu par le propriétaire du portfolio. */
-export function notificationMail(
-  payload: ContactPayload,
-  to: string,
-): Mail {
+export function notificationMail(payload: ContactPayload, to: string): Mail {
   const subject = `[Portfolio] ${singleLine(payload.subject, 150)}`;
 
   const body = `
@@ -117,7 +114,10 @@ export function notificationMail(
 }
 
 /** Accusé de réception envoyé au visiteur. */
-export function confirmationMail(payload: ContactPayload, replyTo: string): Mail {
+export function confirmationMail(
+  payload: ContactPayload,
+  replyTo: string,
+): Mail {
   const subject = `Votre message a bien été envoyé`;
   // Prénom et nom du visiteur en capitales, y compris les accents (é → É).
   const recipient = payload.name.trim().toLocaleUpperCase("fr-FR");

@@ -1,7 +1,11 @@
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost" | "onDark";
+type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -10,10 +14,8 @@ const base =
 const variants: Record<Variant, string> = {
   primary: "bg-accent text-white hover:bg-accent-strong",
   secondary:
-    "border border-line bg-white text-navy hover:border-navy/40 hover:text-accent",
+    "border border-line bg-white text-navy hover:border-accent/40 hover:text-accent",
   ghost: "text-navy hover:text-accent",
-  onDark:
-    "border border-white/25 bg-white/5 text-white hover:border-white/50 hover:bg-white/10",
 };
 
 const sizes: Record<Size, string> = {
@@ -64,7 +66,10 @@ export function ActionButton({
   ...props
 }: ActionButtonProps) {
   return (
-    <button {...props} className={cn(base, variants[variant], sizes[size], className)}>
+    <button
+      {...props}
+      className={cn(base, variants[variant], sizes[size], className)}
+    >
       {children}
     </button>
   );

@@ -3,7 +3,13 @@ import { contact, site } from "@/lib/data/site";
 import type { Mail } from "@/lib/email/templates";
 
 /** Catégorie d'échec, déterminée à partir des codes renvoyés par Resend. */
-export type FailureKind = "config" | "from" | "rate" | "quota" | "network" | "unknown";
+export type FailureKind =
+  | "config"
+  | "from"
+  | "rate"
+  | "quota"
+  | "network"
+  | "unknown";
 
 export type SendFailure = {
   kind: FailureKind;
@@ -14,12 +20,16 @@ export type SendFailure = {
 export type SendOutcome = { ok: true } | { ok: false; failure: SendFailure };
 
 const userMessages: Record<FailureKind, string> = {
-  config: "L’envoi de messages n’est pas encore activé sur ce portfolio. Utilisez les coordonnées à côté du formulaire.",
+  config:
+    "L’envoi de messages n’est pas encore activé sur ce portfolio. Utilisez les coordonnées à côté du formulaire.",
   from: "L’adresse d’envoi n’est pas encore autorisée pour ce domaine. Réessayez plus tard ou utilisez les coordonnées à côté du formulaire.",
   rate: "Trop d’envois en peu de temps. Réessayez dans quelques secondes.",
-  quota: "La capacité d’envoi du portfolio est atteinte pour le moment. Réessayez plus tard.",
-  network: "Impossible de joindre le service d’envoi. Réessayez dans un instant.",
-  unknown: "L’envoi a échoué. Réessayez dans un instant ou utilisez les coordonnées à côté du formulaire.",
+  quota:
+    "La capacité d’envoi du portfolio est atteinte pour le moment. Réessayez plus tard.",
+  network:
+    "Impossible de joindre le service d’envoi. Réessayez dans un instant.",
+  unknown:
+    "L’envoi a échoué. Réessayez dans un instant ou utilisez les coordonnées à côté du formulaire.",
 };
 
 export function failureMessage(failure: SendFailure): string {
@@ -68,7 +78,10 @@ async function deliver(mail: Mail): Promise<SendOutcome> {
   if (!instance) {
     return {
       ok: false,
-      failure: { kind: "config", detail: "RESEND_API_KEY absente de l’environnement." },
+      failure: {
+        kind: "config",
+        detail: "RESEND_API_KEY absente de l’environnement.",
+      },
     };
   }
 

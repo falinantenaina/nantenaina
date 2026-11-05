@@ -88,7 +88,8 @@ export async function submitContact(
   ) {
     return {
       status: "error",
-      message: "Envoi trop rapide. Merci de patienter un instant avant de réessayer.",
+      message:
+        "Envoi trop rapide. Merci de patienter un instant avant de réessayer.",
     };
   }
 
@@ -106,7 +107,8 @@ export async function submitContact(
   if (isRateLimited(ip)) {
     return {
       status: "error",
-      message: "Trop d’envois en peu de temps. Réessayez dans quelques minutes.",
+      message:
+        "Trop d’envois en peu de temps. Réessayez dans quelques minutes.",
     };
   }
 
@@ -137,6 +139,7 @@ export async function submitContact(
 
   return {
     status: "success",
-    message: "Votre message a bien été envoyé. Je vous réponds sous 48 heures ouvrées.",
+    message:
+      "Votre message a bien été envoyé. Je vous réponds sous 48 heures ouvrées.",
   };
 }

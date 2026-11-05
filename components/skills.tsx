@@ -4,7 +4,6 @@ import { skillGroups, type SkillGroupId } from "@/lib/data/skills";
 import { sectionIds } from "@/lib/data/site";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
-import { cn } from "@/lib/utils";
 
 const icons: Record<SkillGroupId, LucideIcon> = {
   frontend: Layout,
@@ -20,29 +19,23 @@ export function Skills() {
       id={sectionIds.skills}
       eyebrow="Compétences"
       index="02"
-      title="Un socle technique complet"
-      description="Les technologies que j’utilise au quotidien, réparties par domaine d’intervention. Aucun pourcentage artificiel : seuls des outils réellement utilisés sur des projets."
-      className="border-b border-line bg-surface/45"
+      title="Les outils avec lesquels je travaille"
+      className="bg-surface"
     >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
         {skillGroups.map((group, index) => {
           const Icon = icons[group.id];
-          const isLastRowWide = index === skillGroups.length - 1;
           return (
-            <Reveal
-              key={group.id}
-              delay={(index % 3) * 70}
-              className={cn("min-w-0", isLastRowWide && "sm:col-span-2")}
-            >
-              <article className="h-full rounded-xl border border-line bg-white p-6 transition-colors duration-200 hover:border-accent/35">
+            <Reveal key={group.id} delay={(index % 3) * 70} className="min-w-0">
+              <article className="h-full py-5">
                 <div className="flex items-center gap-3">
                   <span
                     aria-hidden="true"
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-surface text-navy"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-accent/20 bg-accent/10 text-accent"
                   >
                     <Icon className="size-4.5" strokeWidth={1.75} />
                   </span>
-                  <h3 className="text-[15px] font-semibold text-navy">
+                  <h3 className="text-base font-semibold text-ink">
                     {group.title}
                   </h3>
                 </div>
@@ -50,7 +43,7 @@ export function Skills() {
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded-full border border-line bg-surface/70 px-3 py-1.5 text-[13px] font-medium text-navy"
+                      className="rounded-md bg-white px-3 py-1.5 text-sm text-muted"
                     >
                       {item}
                     </li>

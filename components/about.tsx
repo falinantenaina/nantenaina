@@ -24,41 +24,49 @@ export function About() {
       eyebrow="À propos"
       index="01"
       title="Un développeur orienté solutions"
-      className="border-b border-line"
     >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="space-y-5 lg:col-span-7 min-w-0">
-          {paragraphs.map((paragraph, index) => (
-            <Reveal key={index} delay={index * 60}>
-              <p className="text-base leading-relaxed text-muted sm:text-[17px]">
+      <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
+        <Reveal className="min-w-0 lg:col-span-7">
+          <div className="h-full space-y-5 lg:pr-10">
+            {paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={
+                  index === 0
+                    ? "text-[18px]/[1.6] text-ink sm:text-[21px]/[1.6]"
+                    : "text-[15px]/[1.75] text-muted sm:text-[17px]/[1.75]"
+                }
+              >
                 {paragraph}
               </p>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
 
-        <ul className="grid min-w-0 gap-4 lg:col-span-5">
+        <ul className="grid min-w-0 gap-4 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1 lg:gap-5">
           {expertiseDomains.map((domain, index) => {
             const Icon = icons[domain.icon];
             return (
-              <Reveal key={domain.id} delay={index * 80}>
-                <li className="flex h-full items-start gap-4 rounded-xl border border-line bg-white p-5 transition-colors duration-200 hover:border-accent/35">
-                  <span
-                    aria-hidden="true"
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-surface text-navy"
-                  >
-                    <Icon className="size-5" strokeWidth={1.75} />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-navy">
-                      {domain.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">
-                      {domain.description}
-                    </p>
+              <li key={domain.id} className="min-w-0">
+                <Reveal delay={index * 80} className="h-full">
+                  <div className="flex h-full flex-col gap-4 py-4 lg:flex-row lg:items-start">
+                    <span
+                      aria-hidden="true"
+                      className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-accent/20 bg-accent/10 text-accent"
+                    >
+                      <Icon className="size-5" strokeWidth={1.75} />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-ink">
+                        {domain.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                        {domain.description}
+                      </p>
+                    </div>
                   </div>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             );
           })}
         </ul>

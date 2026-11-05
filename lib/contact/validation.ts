@@ -93,5 +93,7 @@ export function escapeHtml(value: string): string {
 /** Texte sur une seule ligne, pour les champs affichés dans un tableau. */
 export function singleLine(value: string, max = 200): string {
   const normalized = value.replace(/\s+/g, " ").trim();
-  return normalized.length > max ? `${normalized.slice(0, max - 1)}…` : normalized;
+  return normalized.length > max
+    ? `${normalized.slice(0, max - 1)}…`
+    : normalized;
 }

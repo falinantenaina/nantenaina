@@ -60,8 +60,9 @@ const textFields: {
   },
 ];
 
+/* text-base (16 px) : évite le zoom automatique des champs sur iOS. */
 const fieldClass =
-  "block w-full rounded-lg border bg-white px-4 py-3 text-[15px] text-ink transition-colors placeholder:text-muted/55 focus:outline-none focus:ring-2 focus:ring-accent/20";
+  "block w-full rounded-xl border bg-surface px-4 py-3 text-base text-ink transition-colors placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20";
 
 /** Lit les champs depuis le `FormData` réellement soumis. */
 function readValues(formData: FormData): Values {
@@ -174,18 +175,19 @@ export function ContactForm() {
       action={formAction}
       onSubmit={handleSubmit}
       aria-busy={pending || undefined}
-      className="relative min-w-0 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
+      className="surface-card relative min-w-0 rounded-xl p-5 sm:p-8"
     >
       {!contact.email ? (
-        <p className="mb-6 flex items-start gap-2.5 rounded-lg border border-line bg-surface px-4 py-3 text-[13px] leading-relaxed text-navy">
+        <p className="mb-6 flex items-start gap-2.5 rounded-2xl border border-accent/25 bg-accent/5 px-4 py-3 text-[13px] leading-relaxed text-ink">
           <MailWarning
             aria-hidden="true"
             className="mt-0.5 size-4 shrink-0 text-accent"
           />
           <span>
             Le destinataire du formulaire n’est pas encore configuré. Renseignez
-            l’adresse e-mail dans <code className="font-mono">lib/data/site.ts</code>{" "}
-            pour activer l’envoi.
+            l’adresse e-mail dans{" "}
+            <code className="font-mono">lib/data/site.ts</code> pour activer
+            l’envoi.
           </span>
         </p>
       ) : null}
@@ -193,7 +195,7 @@ export function ContactForm() {
       {/* Piège à robots : invisible pour les humains, rempli par les automates. */}
       <div
         aria-hidden="true"
-        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+        className="absolute left-[-9999px] h-px w-px overflow-hidden"
       >
         <label htmlFor="website">Ne pas remplir ce champ</label>
         <input
@@ -214,11 +216,14 @@ export function ContactForm() {
           return (
             <div
               key={field.id}
-              className={cn("min-w-0", field.id === "subject" && "sm:col-span-2")}
+              className={cn(
+                "min-w-0",
+                field.id === "subject" && "sm:col-span-2",
+              )}
             >
               <label
                 htmlFor={field.id}
-                className="mb-1.5 block text-sm font-medium text-navy"
+                className="mb-1.5 block text-sm font-medium text-ink"
               >
                 {field.label}
               </label>
@@ -236,7 +241,7 @@ export function ContactForm() {
                 className={cn(
                   fieldClass,
                   error
-                    ? "border-danger/60 focus:ring-danger/15"
+                    ? "border-danger/60 focus:ring-danger/20"
                     : "border-line focus:border-accent",
                 )}
               />
@@ -256,7 +261,7 @@ export function ContactForm() {
         <div className="min-w-0 sm:col-span-2">
           <label
             htmlFor="message"
-            className="mb-1.5 block text-sm font-medium text-navy"
+            className="mb-1.5 block text-sm font-medium text-ink"
           >
             Message
           </label>
@@ -274,7 +279,7 @@ export function ContactForm() {
               fieldClass,
               "resize-y leading-relaxed",
               errors.message
-                ? "border-danger/60 focus:ring-danger/15"
+                ? "border-danger/60 focus:ring-danger/20"
                 : "border-line focus:border-accent",
             )}
           />
@@ -291,7 +296,12 @@ export function ContactForm() {
       </div>
 
       <div className="mt-7 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <ActionButton type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
+        <ActionButton
+          type="submit"
+          size="lg"
+          disabled={pending}
+          className="w-full sm:w-auto"
+        >
           {pending ? (
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
           ) : (
@@ -308,14 +318,20 @@ export function ContactForm() {
       <div role="status" aria-live="polite" className="mt-4 min-h-6">
         {status === "error" ? (
           <p className="flex items-start gap-2 text-sm font-medium text-danger">
-            <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+            <AlertCircle
+              aria-hidden="true"
+              className="mt-0.5 size-4 shrink-0"
+            />
             {message}
           </p>
         ) : null}
 
         {status === "success" ? (
           <p className="flex items-start gap-2 text-sm font-medium text-success">
-            <CheckCircle2 aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+            <CheckCircle2
+              aria-hidden="true"
+              className="mt-0.5 size-4 shrink-0"
+            />
             {message}
           </p>
         ) : null}

@@ -74,11 +74,11 @@ export function SiteHeader() {
             >
               <span
                 aria-hidden="true"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-navy text-sm font-semibold tracking-tight text-white transition-colors duration-200 group-hover:bg-accent"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent text-sm font-semibold tracking-tight text-white transition-colors duration-200 group-hover:bg-accent"
               >
                 {site.initials}
               </span>
-              <span className="text-[15px] font-semibold tracking-tight text-navy">
+              <span className="text-[15px] font-semibold tracking-tight text-accent">
                 {site.firstName}
               </span>
             </a>

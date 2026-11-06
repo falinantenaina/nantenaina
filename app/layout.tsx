@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "création site web Madagascar",
     "portfolio",
   ],
-  alternates: { canonical: "./" },
+  alternates: { canonical: "https://nantenaina.com" },
   openGraph: {
     type: "website",
     locale: "fr_FR",

@@ -38,7 +38,7 @@ app/
   layout.tsx              polices, métadonnées SEO, en-tête, pied de page
   page.tsx                composition des sections
   globals.css             jetons de design (Tailwind v4 @theme)
-  icon.svg                monogramme « FR »
+  favicon.ico            icône d’onglet (profil)
   opengraph-image.tsx     carte de partage générée à la volée
 components/
   site-header.tsx         navigation collante + menu mobile
@@ -71,7 +71,7 @@ export const contact = {
   email: "",      // ex. "contact@exemple.com" → active l'envoi du formulaire
   linkedin: "",   // ex. "https://www.linkedin.com/in/…" → affiche le lien
   github: "https://github.com/falinantenaina",
-  portfolio: "https://nantenaina.is-a.dev/",
+  portfolio: "https://nantenaina.com/",
 };
 ```
 
@@ -136,8 +136,7 @@ Le repli sur l'aperçu illustratif est automatique : dès que `image` est absent
 
 ### 5. Favicon
 
-`app/icon.svg` — monogramme « FR » sur fond bleu marine. Remplaçable par
-`app/favicon.ico` ou `app/icon.png` si nécessaire.
+`app/favicon.ico` — photo de profil utilisée comme icône d’onglet.
 
 ## Envoi du formulaire de contact
 

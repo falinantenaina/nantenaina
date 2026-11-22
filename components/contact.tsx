@@ -26,7 +26,7 @@ export function Contact() {
                 >
                   Écrivez-moi.
                   <br />
-                  Je réponds sous 48 h.
+                  Je réponds sous 24 h.
                 </h2>
               </Reveal>
             </div>
@@ -53,7 +53,10 @@ export function Contact() {
         </Container>
       </section>
 
-      <section aria-label="Formulaire de contact" className="border-b border-line">
+      <section
+        aria-label="Formulaire de contact"
+        className="border-b border-line"
+      >
         <Container className="py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="min-w-0 lg:col-span-4">

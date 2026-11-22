@@ -6,10 +6,8 @@ export type NavItem = {
 };
 
 export const navigation: NavItem[] = [
-  { label: "Accueil", href: `#${sectionIds.hero}` },
-  { label: "À propos", href: `#${sectionIds.about}` },
-  { label: "Compétences", href: `#${sectionIds.skills}` },
+  { label: "Expertises", href: `#${sectionIds.expertises}` },
   { label: "Projets", href: `#${sectionIds.projects}` },
-  { label: "Expérience", href: `#${sectionIds.experience}` },
+  { label: "Approche", href: `#${sectionIds.approach}` },
   { label: "Contact", href: `#${sectionIds.contact}` },
 ];

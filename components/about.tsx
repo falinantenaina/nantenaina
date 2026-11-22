@@ -1,68 +1,50 @@
-import { LayoutTemplate, Server, Database } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { expertiseDomains } from "@/lib/data/skills";
-import { sectionIds } from "@/lib/data/site";
-import { Section } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-
-const icons: Record<string, LucideIcon> = {
-  layout: LayoutTemplate,
-  server: Server,
-  database: Database,
-};
-
-const paragraphs = [
-  "Je suis développeur web Full Stack et je travaille sur la conception et le développement d’applications web, depuis les interfaces utilisateur jusqu’aux fonctionnalités backend.",
-  "J’utilise principalement React, TypeScript, Next.js, Node.js et Express.js. Je porte une attention particulière à la qualité du code, à l’expérience utilisateur, à la structure des données et aux besoins métier.",
-  "À travers mes projets professionnels et personnels, je cherche à construire des solutions utiles, maintenables et adaptées aux contraintes réelles des entreprises.",
-];
+import { about, sectionIds } from "@/lib/data/site";
 
 export function About() {
   return (
-    <Section
+    <section
       id={sectionIds.about}
-      eyebrow="À propos"
-      index="01"
-      title="Un développeur orienté solutions"
+      aria-labelledby={`${sectionIds.about}-title`}
       className="border-b border-line"
     >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="space-y-5 lg:col-span-7 min-w-0">
-          {paragraphs.map((paragraph, index) => (
-            <Reveal key={index} delay={index * 60}>
-              <p className="text-base leading-relaxed text-muted sm:text-[17px]">
-                {paragraph}
+      <Container className="py-20 sm:py-24">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="min-w-0 lg:col-span-5">
+            <Reveal>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                {about.eyebrow}
               </p>
+              <h2
+                id={`${sectionIds.about}-title`}
+                className="mt-4 text-[2rem]/[1.1] font-semibold tracking-[-0.03em] text-ink sm:text-[2.5rem]/[1.08]"
+              >
+                {about.titleLine1}
+                <br />
+                {about.titleLine2}
+              </h2>
             </Reveal>
-          ))}
-        </div>
+          </div>
 
-        <ul className="grid min-w-0 gap-4 lg:col-span-5">
-          {expertiseDomains.map((domain, index) => {
-            const Icon = icons[domain.icon];
-            return (
-              <Reveal key={domain.id} delay={index * 80}>
-                <li className="flex h-full items-start gap-4 rounded-xl border border-line bg-white p-5 transition-colors duration-200 hover:border-accent/35">
-                  <span
-                    aria-hidden="true"
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-surface text-navy"
-                  >
-                    <Icon className="size-5" strokeWidth={1.75} />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-navy">
-                      {domain.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">
-                      {domain.description}
-                    </p>
-                  </div>
-                </li>
-              </Reveal>
-            );
-          })}
-        </ul>
-      </div>
-    </Section>
+          <div className="min-w-0 lg:col-span-7">
+            <Reveal delay={70}>
+              <div className="space-y-5">
+                {about.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="text-[15px]/[1.7] text-muted">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <blockquote className="mt-10 border-l-2 border-accent pl-6">
+                <p className="font-serif text-[1.5rem]/[1.3] italic text-ink sm:text-[1.75rem]/[1.25]">
+                  « {about.quote} »
+                </p>
+              </blockquote>
+            </Reveal>
+          </div>
+        </div>
+      </Container>
+    </section>
   );
 }

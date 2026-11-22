@@ -1,11 +1,10 @@
 "use client";
 
-import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
 import { navigation } from "@/lib/data/navigation";
 import { sectionIds, site } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export function SiteHeader() {
@@ -14,7 +13,6 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement | null>(null);
   const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
-  /* Suivi de la section courante pour la navigation. */
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
@@ -40,7 +38,6 @@ export function SiteHeader() {
     return () => observer.disconnect();
   }, []);
 
-  /* Ouverture / fermeture du menu mobile. */
   useEffect(() => {
     if (!open) return;
 
@@ -63,27 +60,19 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-canvas/95 backdrop-blur-md">
       <nav aria-label="Navigation principale">
         <Container>
-          <div className="flex h-16 items-center justify-between gap-4 lg:h-18">
+          <div className="flex h-14 items-center justify-between gap-4 lg:h-16">
             <a
               href={`#${sectionIds.hero}`}
-              className="group flex items-center gap-3 rounded-md"
+              className="text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:text-accent"
               aria-label={`${site.fullName} — retour à l’accueil`}
             >
-              <span
-                aria-hidden="true"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent text-sm font-semibold tracking-tight text-white transition-colors duration-200 group-hover:bg-accent"
-              >
-                {site.initials}
-              </span>
-              <span className="text-[15px] font-semibold tracking-tight text-accent">
-                {site.firstName}
-              </span>
+              {site.firstName} <span className="text-accent">/</span>
             </a>
 
-            <ul className="hidden items-center gap-7 lg:flex">
+            <ul className="hidden items-center gap-7 md:flex">
               {navigation.map((item) => {
                 const isActive = activeSection === item.href.slice(1);
                 return (
@@ -92,10 +81,9 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
-                        "link-underline rounded-sm py-1.5 text-sm font-medium transition-colors duration-200",
-                        isActive ? "text-accent" : "text-muted hover:text-navy",
+                        "text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors",
+                        isActive ? "text-accent" : "text-muted hover:text-ink",
                       )}
-                      data-active={isActive}
                     >
                       {item.label}
                     </a>
@@ -104,45 +92,33 @@ export function SiteHeader() {
               })}
             </ul>
 
-            <div className="flex items-center gap-2">
-              <ActionLink
-                href="#contact"
-                variant="primary"
-                size="sm"
-                className="hidden lg:inline-flex"
-              >
-                Parlons de votre projet
-                <ArrowUpRight aria-hidden="true" className="size-4" />
-              </ActionLink>
-
-              <button
-                ref={toggleRef}
-                type="button"
-                className="grid h-11 w-11 place-items-center rounded-lg border border-line text-navy transition-colors hover:border-navy/40 hover:text-accent lg:hidden"
-                aria-expanded={open}
-                aria-controls="mobile-menu"
-                aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-                onClick={() => setOpen((value) => !value)}
-              >
-                {open ? (
-                  <X aria-hidden="true" className="size-5" />
-                ) : (
-                  <Menu aria-hidden="true" className="size-5" />
-                )}
-              </button>
-            </div>
+            <button
+              ref={toggleRef}
+              type="button"
+              className="grid h-10 w-10 place-items-center text-ink md:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              onClick={() => setOpen((value) => !value)}
+            >
+              {open ? (
+                <X aria-hidden="true" className="size-5" />
+              ) : (
+                <Menu aria-hidden="true" className="size-5" />
+              )}
+            </button>
           </div>
         </Container>
 
         <div
           id="mobile-menu"
           hidden={!open}
-          className="lg:hidden"
+          className="md:hidden"
           onClick={(event) => {
             if (event.target === event.currentTarget) setOpen(false);
           }}
         >
-          <div className="border-b border-line bg-white px-5 pb-8 pt-2 shadow-card sm:px-8">
+          <div className="border-b border-line bg-canvas px-5 pb-8 pt-2 sm:px-8">
             <ul className="flex flex-col divide-y divide-line">
               {navigation.map((item, index) => {
                 const isActive = activeSection === item.href.slice(1);
@@ -155,9 +131,7 @@ export function SiteHeader() {
                       onClick={() => setOpen(false)}
                       className={cn(
                         "flex items-center justify-between py-4 text-base font-medium transition-colors",
-                        isActive
-                          ? "text-accent"
-                          : "text-navy hover:text-accent",
+                        isActive ? "text-accent" : "text-ink hover:text-accent",
                       )}
                     >
                       {item.label}
@@ -169,17 +143,6 @@ export function SiteHeader() {
                 );
               })}
             </ul>
-
-            <ActionLink
-              href="#contact"
-              variant="primary"
-              size="md"
-              className="mt-6 w-full"
-              onClick={() => setOpen(false)}
-            >
-              Parlons de votre projet
-              <ArrowUpRight aria-hidden="true" className="size-4" />
-            </ActionLink>
           </div>
         </div>
       </nav>

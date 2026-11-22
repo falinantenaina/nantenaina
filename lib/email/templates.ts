@@ -31,7 +31,7 @@ const shell = (title: string, body: string): string => `<!doctype html>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f7fc;padding:32px 16px">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #e2e8f0;overflow:hidden">
             <tr>
               <td style="background:#172b4d;padding:20px 28px">
                 <span style="color:#ffffff;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">${escapeHtml(site.fullName)}</span>
@@ -89,7 +89,7 @@ export function notificationMail(
       ${payload.ip ? row("Adresse IP", escapeHtml(payload.ip)) : ""}
       ${payload.userAgent ? row("Navigateur", escapeHtml(singleLine(payload.userAgent, 160))) : ""}
     </table>
-    <div style="background:#f3f7fc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin-top:16px">
+    <div style="background:#f3f7fc;border:1px solid #e2e8f0;padding:16px 18px;margin-top:16px">
       <p style="margin:0;color:#172033;font-size:15px;line-height:1.65;white-space:pre-wrap;word-break:break-word">${escapeHtml(payload.message.trim())}</p>
     </div>`;
 

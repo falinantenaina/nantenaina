@@ -61,7 +61,7 @@ const textFields: {
 ];
 
 const fieldClass =
-  "block w-full rounded-lg border bg-white px-4 py-3 text-[15px] text-ink transition-colors placeholder:text-muted/55 focus:outline-none focus:ring-2 focus:ring-accent/20";
+  "block w-full border bg-white px-4 py-3 text-[15px] text-ink transition-colors placeholder:text-muted/55 focus:outline-none focus:ring-1 focus:ring-accent/30";
 
 /** Lit les champs depuis le `FormData` réellement soumis. */
 function readValues(formData: FormData): Values {
@@ -174,10 +174,10 @@ export function ContactForm() {
       action={formAction}
       onSubmit={handleSubmit}
       aria-busy={pending || undefined}
-      className="relative min-w-0 rounded-2xl border border-line bg-white p-6 shadow-card sm:p-8"
+      className="relative min-w-0 border border-line bg-white p-6 sm:p-8"
     >
       {!contact.email ? (
-        <p className="mb-6 flex items-start gap-2.5 rounded-lg border border-line bg-surface px-4 py-3 text-[13px] leading-relaxed text-navy">
+        <p className="mb-6 flex items-start gap-2.5 border border-line bg-surface px-4 py-3 text-[13px] leading-relaxed text-ink">
           <MailWarning
             aria-hidden="true"
             className="mt-0.5 size-4 shrink-0 text-accent"
@@ -218,7 +218,7 @@ export function ContactForm() {
             >
               <label
                 htmlFor={field.id}
-                className="mb-1.5 block text-sm font-medium text-navy"
+                className="mb-1.5 block text-sm font-medium text-ink"
               >
                 {field.label}
               </label>
@@ -256,7 +256,7 @@ export function ContactForm() {
         <div className="min-w-0 sm:col-span-2">
           <label
             htmlFor="message"
-            className="mb-1.5 block text-sm font-medium text-navy"
+            className="mb-1.5 block text-sm font-medium text-ink"
           >
             Message
           </label>

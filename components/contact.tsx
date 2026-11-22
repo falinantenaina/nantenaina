@@ -1,141 +1,83 @@
 import { ContactForm } from "@/components/contact/contact-form";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/brand-icons";
+import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { contact, sectionIds } from "@/lib/data/site";
-import { ArrowUpRight, Globe, Mail } from "lucide-react";
-
-type LinkItem = {
-  id: string;
-  label: string;
-  value: string;
-  href: string;
-  icon: "github" | "linkedin" | "mail" | "link";
-};
-
-const links: LinkItem[] = [
-  {
-    id: "github",
-    label: "GitHub",
-    value: "github.com/falinantenaina",
-    href: contact.github,
-    icon: "github",
-  },
-  {
-    id: "portfolio",
-    label: "Portfolio actuel",
-    value: "nantenaina.com",
-    href: contact.portfolio,
-    icon: "link",
-  },
-  ...(contact.email
-    ? [
-        {
-          id: "email",
-          label: "E-mail",
-          value: contact.email,
-          href: `mailto:${contact.email}`,
-          icon: "mail" as const,
-        },
-      ]
-    : []),
-  ...(contact.linkedin
-    ? [
-        {
-          id: "linkedin",
-          label: "LinkedIn",
-          value: contact.linkedin,
-          href: contact.linkedin,
-          icon: "linkedin" as const,
-        },
-      ]
-    : []),
-];
-
-function LinkIcon({ icon }: { icon: LinkItem["icon"] }) {
-  const className = "size-4 shrink-0";
-  if (icon === "github") return <GithubIcon className={className} />;
-  if (icon === "linkedin") return <LinkedinIcon className={className} />;
-  if (icon === "mail") return <Mail aria-hidden="true" className={className} />;
-  return <Globe aria-hidden="true" className={className} />;
-}
+import { ArrowUpRight } from "lucide-react";
 
 export function Contact() {
   return (
-    <section
-      id={sectionIds.contact}
-      aria-labelledby={`${sectionIds.contact}-title`}
-      className="scroll-mt-24 py-20 sm:py-24"
-    >
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="min-w-0 lg:col-span-5">
-            <Reveal>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]">
-                <span aria-hidden="true" className="tabular-nums text-muted">
-                  05
-                </span>
-                <span aria-hidden="true" className="text-muted/70">
-                  —
-                </span>
-                <span className="text-accent">Contact</span>
-              </p>
-              <h2
-                id={`${sectionIds.contact}-title`}
-                className="mt-3 text-[1.75rem]/[1.16] font-semibold tracking-[-0.02em] text-navy sm:text-[2.125rem]/[1.14]"
-              >
-                Parlons de votre prochain projet.
-              </h2>
-              <p className="mt-5 max-w-md text-[16px]/[1.65] text-muted">
-                Vous avez besoin d’un site web, d’une application ou d’une
-                solution adaptée à votre activité ? Contactez-moi pour discuter
-                de votre besoin.
-              </p>
-            </Reveal>
+    <>
+      <section
+        id={sectionIds.contact}
+        aria-labelledby={`${sectionIds.contact}-title`}
+        className="bg-accent text-white"
+      >
+        <Container className="py-20 sm:py-24">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="min-w-0 lg:col-span-8">
+              <Reveal>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
+                  Un projet en tête ?
+                </p>
+                <h2
+                  id={`${sectionIds.contact}-title`}
+                  className="mt-4 text-[2rem]/[1.08] font-semibold tracking-[-0.03em] sm:text-[2.75rem]/[1.05] lg:text-[3.25rem]/[1.04]"
+                >
+                  Écrivez-moi.
+                  <br />
+                  Je réponds sous 48 h.
+                </h2>
+              </Reveal>
+            </div>
 
-            <Reveal delay={90}>
-              <ul className="mt-9 divide-y divide-line border-y border-line">
-                {links.map((link) => (
-                  <li key={link.id}>
-                    <a
-                      href={link.href}
-                      {...(link.href.startsWith("http")
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className="group flex items-center gap-4 py-4 transition-colors hover:text-accent"
-                    >
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-line bg-surface text-navy transition-colors group-hover:border-accent/40 group-hover:text-accent">
-                        <LinkIcon icon={link.icon} />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-medium text-navy transition-colors group-hover:text-accent">
-                          {link.label}
-                        </span>
-                        <span className="block truncate text-sm text-muted">
-                          {link.value}
-                        </span>
-                      </span>
-                      <ArrowUpRight
-                        aria-hidden="true"
-                        className="size-4 shrink-0 text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+            <div className="min-w-0 flex flex-col justify-end lg:col-span-4">
+              <Reveal delay={70}>
+                <p className="text-[15px]/[1.65] text-white/75">
+                  Un premier échange pour cadrer votre besoin, sans engagement.
+                  C’est moi qui lis et qui répond.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <ActionLink
+                    href={`mailto:${contact.email}`}
+                    variant="onDark"
+                    size="md"
+                  >
+                    Me contacter
+                    <ArrowUpRight aria-hidden="true" className="size-4" />
+                  </ActionLink>
+                </div>
+              </Reveal>
+            </div>
           </div>
+        </Container>
+      </section>
 
-          <div className="min-w-0 lg:col-span-7">
-            <Reveal delay={60}>
-              <h3 className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-muted">
-                Envoyer un message
-              </h3>
-              <ContactForm />
-            </Reveal>
+      <section aria-label="Formulaire de contact" className="border-b border-line">
+        <Container className="py-16 sm:py-20">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="min-w-0 lg:col-span-4">
+              <Reveal>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                  Ou par formulaire
+                </p>
+                <h3 className="mt-4 text-[1.5rem]/[1.2] font-semibold tracking-[-0.02em] text-ink sm:text-[1.75rem]/[1.15]">
+                  Envoyez-moi un message
+                </h3>
+                <p className="mt-4 text-[14px]/[1.65] text-muted">
+                  Remplissez les champs ci-contre : le message part directement
+                  dans ma boîte, sans passer par votre messagerie.
+                </p>
+              </Reveal>
+            </div>
+            <div className="min-w-0 lg:col-span-8">
+              <Reveal delay={60}>
+                <ContactForm />
+              </Reveal>
+            </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 }

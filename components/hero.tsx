@@ -1,113 +1,66 @@
 import { ActionLink } from "@/components/ui/action";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { sectionIds, site } from "@/lib/data/site";
-import { ArrowRight, Mail } from "lucide-react";
-import Image from "next/image";
+import { hero, sectionIds } from "@/lib/data/site";
+import { ArrowUpRight } from "lucide-react";
 
 export function Hero() {
   return (
     <section
       id={sectionIds.hero}
       aria-labelledby={`${sectionIds.hero}-title`}
-      className="scroll-mt-24 border-b border-line bg-canvas"
+      className="border-b border-line"
     >
-      <Container className="py-16 sm:py-20 lg:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="min-w-0 lg:col-span-7">
-            <Reveal>
-              <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-navy">
-                <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-accent"
-                />
-                Développeur web Full Stack
-              </p>
-            </Reveal>
+      <Container className="pt-16 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20">
+        <Reveal>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+            {hero.eyebrow}
+          </p>
+        </Reveal>
 
+        <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-8">
             <Reveal delay={70}>
               <h1
                 id={`${sectionIds.hero}-title`}
-                className="mt-8 text-[2.25rem] font-semibold leading-[1.08] tracking-tight text-navy sm:text-[3rem] lg:text-[3.45rem] lg:leading-[1.04]"
+                className="text-[2.5rem]/[1.05] font-semibold tracking-[-0.03em] text-ink sm:text-[3.5rem]/[1.03] lg:text-[4.25rem]/[1.02]"
               >
-                Je transforme vos idées en applications web{" "}
-                <span className="text-accent">modernes et performantes.</span>
+                {hero.titleLine1}
+                <br />
+                <span className="font-serif font-normal italic">
+                  {hero.titleItalic}
+                </span>
+                <br />
+                {hero.titleLine3}
               </h1>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <p className="mt-7 max-w-136 text-[16px]/[1.65] text-muted sm:text-[17px]/[1.65]">
-                Je conçois et développe des sites web et des applications
-                adaptés aux besoins des entreprises. Du frontend au backend, je
-                privilégie des interfaces intuitives, des fonctionnalités
-                fiables et un code maintenable.
-              </p>
-            </Reveal>
-
-            <Reveal delay={210}>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ActionLink
-                  href={`#${sectionIds.projects}`}
-                  size="lg"
-                  className="sm:w-auto"
-                >
-                  Découvrir mes projets
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </ActionLink>
-                <ActionLink
-                  href={`#${sectionIds.contact}`}
-                  variant="secondary"
-                  size="lg"
-                  className="sm:w-auto"
-                >
-                  <Mail aria-hidden="true" className="size-4" />
-                  Me contacter
-                </ActionLink>
-              </div>
-            </Reveal>
-
-            <Reveal delay={280}>
-              <p className="mt-7 flex items-start gap-2.5 text-sm/[1.6] text-muted">
-                <span
-                  aria-hidden="true"
-                  className="ticker-dot mt-1.75 h-2 w-2 shrink-0 rounded-full bg-accent"
-                />
-                Ouvert aux missions freelance et aux opportunités
-                professionnelles.
-              </p>
             </Reveal>
           </div>
 
-          <div className="min-w-0 lg:col-span-5">
-            <Reveal
-              delay={120}
-              className="relative mx-auto w-full max-w-sm lg:max-w-none"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-surface"
-              />
-              <div className="relative overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
-                <div className="relative aspect-4/5 w-full">
-                  <Image
-                    src={site.photo.src}
-                    alt={site.photo.alt}
-                    fill
-                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 440px, calc(100vw - 40px)"
-                    className="object-cover object-top"
-                    preload
-                  />
-                </div>
-                <div className="flex items-center justify-between gap-3 border-t border-line bg-white px-4 py-3">
-                  <span className="text-xs font-medium text-navy">
-                    {site.fullName}
-                  </span>
-                  <span className="text-xs text-muted">Full Stack</span>
-                </div>
+          <div className="min-w-0 flex flex-col justify-end lg:col-span-4">
+            <Reveal delay={140}>
+              <p className="max-w-md text-[15px]/[1.65] text-muted">
+                {hero.description}
+              </p>
+              <div className="mt-7">
+                <ActionLink
+                  href={`#${sectionIds.contact}`}
+                  variant="primary"
+                  size="md"
+                >
+                  {hero.cta}
+                  <ArrowUpRight aria-hidden="true" className="size-4" />
+                </ActionLink>
               </div>
             </Reveal>
           </div>
         </div>
+
+        <Reveal delay={210}>
+          <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+            <span>{hero.metaLeft}</span>
+            <span>{hero.metaRight}</span>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

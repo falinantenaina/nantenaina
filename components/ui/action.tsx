@@ -5,21 +5,21 @@ type Variant = "primary" | "secondary" | "ghost" | "onDark";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-200";
+  "inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.12em] transition-colors duration-200";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-white hover:bg-accent-strong",
+  primary: "bg-ink text-white hover:bg-accent",
   secondary:
-    "border border-line bg-white text-navy hover:border-navy/40 hover:text-accent",
-  ghost: "text-navy hover:text-accent",
+    "border border-ink text-ink hover:bg-ink hover:text-white",
+  ghost: "text-ink hover:text-accent",
   onDark:
-    "border border-white/25 bg-white/5 text-white hover:border-white/50 hover:bg-white/10",
+    "bg-white text-ink hover:bg-canvas",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-3.5 text-sm",
-  md: "h-11 px-5 text-sm sm:text-base",
-  lg: "h-12 px-6 text-base",
+  sm: "h-9 px-4 text-[11px]",
+  md: "h-11 px-6 text-[11px]",
+  lg: "h-12 px-7 text-xs",
 };
 
 type CommonProps = {
@@ -64,7 +64,10 @@ export function ActionButton({
   ...props
 }: ActionButtonProps) {
   return (
-    <button {...props} className={cn(base, variants[variant], sizes[size], className)}>
+    <button
+      {...props}
+      className={cn(base, variants[variant], sizes[size], className)}
+    >
       {children}
     </button>
   );

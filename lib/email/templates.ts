@@ -126,7 +126,7 @@ export function confirmationMail(payload: ContactPayload, replyTo: string): Mail
     ${heading("Merci pour votre message")}
     ${paragraph(`Bonjour ${recipient},`)}
     ${paragraph(
-      `Votre message « ${singleLine(payload.subject, 150)} » a bien été transmis. Je reviens vers vous sous 48 heures ouvrées.`,
+      `Votre message « ${singleLine(payload.subject, 150)} » a bien été transmis. Je reviens vers vous sous 24 heures.`,
     )}
     ${paragraph(
       "Si votre demande est urgente, vous pouvez répondre directement à cet e-mail.",
@@ -142,7 +142,7 @@ export function confirmationMail(payload: ContactPayload, replyTo: string): Mail
     text: [
       `Bonjour ${recipient},`,
       "",
-      `Votre message « ${payload.subject.trim()} » a bien été transmis. Je reviens vers vous sous 48 heures ouvrées.`,
+      `Votre message « ${payload.subject.trim()} » a bien été transmis. Je reviens vers vous sous 24 heures.`,
       "",
       "Si votre demande est urgente, vous pouvez répondre directement à cet e-mail.",
       "",

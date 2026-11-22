@@ -137,6 +137,6 @@ export async function submitContact(
 
   return {
     status: "success",
-    message: "Votre message a bien été envoyé. Je vous réponds sous 48 heures ouvrées.",
+    message: "Votre message a bien été envoyé. Je vous réponds sous 24 heures.",
   };
 }

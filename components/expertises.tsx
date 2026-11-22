@@ -41,9 +41,9 @@ export function Expertises() {
             <Reveal
               key={expertise.id}
               delay={index * 70}
-              className="min-w-0 bg-canvas"
+              className="min-w-0 bg-canvas pt-8 pb-4 sm:px-8 sm:first:pl-0 sm:last:pr-0 lg:px-10 lg:first:pl-0 lg:last:pr-0"
             >
-              <article className="flex h-full flex-col px-0 pt-8 pb-2 sm:px-6 sm:first:pl-0 lg:px-7 lg:first:pl-0">
+              <article className="flex h-full flex-col">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
                   {expertise.index}
                 </span>

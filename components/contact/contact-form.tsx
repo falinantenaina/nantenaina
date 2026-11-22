@@ -300,7 +300,7 @@ export function ContactForm() {
           {pending ? "Envoi en cours…" : "Envoyer le message"}
         </ActionButton>
         <p className="min-w-0 text-xs leading-relaxed text-muted sm:max-w-[16rem] sm:text-right">
-          Réponse sous 48 heures ouvrées. Vos coordonnées ne servent qu’à vous
+          Réponse sous 24 heures. Vos coordonnées ne servent qu’à vous
           répondre.
         </p>
       </div>
